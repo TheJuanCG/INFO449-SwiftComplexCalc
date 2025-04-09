@@ -46,6 +46,37 @@ class Calculator {
     func add(lhs: (x: Int, y: Int), rhs: (x: Int, y: Int)) -> (Int, Int) {
         return (lhs.x + rhs.x, lhs.y + rhs.y)
     }
+    
+    func add(lhs: [String: Int],
+             rhs: [String: Int]) -> [String: Int] {
+        
+        var combined = lhs
+        
+        for (key, value) in rhs {
+            combined[key, default: 0] += value
+        }
+        
+        
+        return combined
+    }
+    
+    func subtract(lhs: [String: Int],
+             rhs: [String: Int]) -> [String: Int] {
+        
+        var combined = lhs
+        
+        for (key, value) in rhs {
+            combined[key, default: 0] -= value
+        }
+        
+        
+        return combined
+    }
+    
+
+    func subtract(lhs: (x: Int, y: Int), rhs: (x: Int, y: Int)) -> (Int, Int) {
+        return (lhs.x - rhs.x, lhs.y - rhs.y)
+    }
 
     func subtract(lhs: Int, rhs: Int) -> Int {
         return lhs - rhs;
@@ -56,7 +87,7 @@ class Calculator {
     }
     
     func multiply(_ args: [Int]) -> Int {
-        var prod = 0
+        var prod = 1
         for n in args {
             prod *= n
         }
@@ -70,6 +101,17 @@ class Calculator {
     
     func mathOp(lhs: Int, rhs: Int, op: (Int, Int) -> Int) -> Int {
         return op(lhs, rhs);
+    }
+    
+    func mathOp(args: [Int], beg: Int, op: (Int, Int) -> Int) -> Int {
+        var res = beg
+        
+        for n in args {
+            res = op(res, n);
+        }
+        
+        
+        return res
     }
     
     func count(_ args: [Int]) -> Int {
