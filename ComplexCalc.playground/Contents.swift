@@ -42,6 +42,10 @@ class Calculator {
         
         return sum
     }
+    
+    func add(lhs: (x: Int, y: Int), rhs: (x: Int, y: Int)) -> (Int, Int) {
+        return (lhs.x + rhs.x, lhs.y + rhs.y)
+    }
 
     func subtract(lhs: Int, rhs: Int) -> Int {
         return lhs - rhs;
