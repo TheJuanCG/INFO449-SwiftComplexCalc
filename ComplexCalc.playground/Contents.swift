@@ -119,6 +119,10 @@ class Calculator {
     }
     
     func avg(_ args: [Int]) -> Int {
+        // If the array is empty then we just return 0
+        if (args.isEmpty) {
+            return 0
+        }
         return add(args) / args.count
     }
     
@@ -145,6 +149,8 @@ calc.add(lhs: 2, rhs: 2) == 4
 calc.subtract(lhs: 2, rhs: 2) == 0
 calc.multiply(lhs: 2, rhs: 2) == 4
 calc.divide(lhs: 2, rhs: 2) == 1
+// Tests added
+calc.divide(lhs: -6, rhs: 3) == -2
 
 calc.mathOp(lhs: 5, rhs: 5, op: { (lhs: Int, rhs: Int) -> Int in (lhs + rhs) + (lhs * rhs) }) == 35
     // This style is one way of writing an anonymous function
@@ -158,6 +164,11 @@ calc.count([]) == 0
 calc.avg([2, 2, 2, 2, 2, 2]) == 2
 calc.avg([1, 2, 3, 4, 5]) == 3
 calc.avg([1]) == 1
+// Added calc.avg tests
+calc.avg([0]) == 0
+calc.avg([]) == 0
+
+calc.avg([-1, -2, -3, -4, -5]) == -3
 
 calc.mathOp(args: [1, 2, 3], beg: 0, op: { $0 + $1 }) == 6
     // this is (((0 op 1) op 2) op 3)
@@ -165,6 +176,10 @@ calc.mathOp(args: [1, 2, 3, 4, 5], beg: 0, op: { $0 + $1 }) == 15
     // this is (((((0 op 1) op 2) op 3) op 4) op 5)
 calc.mathOp(args: [1, 1, 1, 1, 1], beg: 1, op: { $0 * $1 }) == 1
     // this is (((((1 op 1) op 1) op 1) op 1) op 1)
+// Test added (I interpret beg as what value we are starting with in the order
+// of operation. So, if adding we are adding with a value starting at 1
+calc.mathOp(args: [], beg: 10, op: { $0 + $1 }) == 10
+
 
 let p1 = (5, 5)
 let p2 = (12, -27)
